@@ -44,9 +44,11 @@ jobs:
         enable-AzPSSession: true
 
     - name: Show Destroy plan
-      run: terraform plan -destroy
+      run: terraform plan -destroy -state="backend.tfvars"
       continue-on-error: true
+      working-directory: ./terraform/environment/development
 
     - name: Destroy resources jobs
       id: destroy
-      run: terraform destroy -auto-approve
+      run: terraform destroy -auto-approve -state="backend.tfvars"
+      working-directory: ./terraform/environment/development
