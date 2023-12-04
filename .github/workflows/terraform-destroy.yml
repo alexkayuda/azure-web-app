@@ -1,10 +1,11 @@
-name: 'Terraform Azure Deployment'
+name: 'Terraform Destroy'
  
 on:
     workflow_dispatch:
         inputs:
             confirmation:
                 description: "Are you sure you want to run Terraform Destroy???"
+                required: true
                 type: choice
                 options:
                     - yes
@@ -13,8 +14,8 @@ on:
  
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  destroy:
+    name: 'Terraform Destroy'
     environment: development
     runs-on: ubuntu-latest
     defaults:
@@ -31,33 +32,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
  
-    # - name: Set up Terraform
-    #   uses: hashicorp/setup-terraform@v3
-    #   with:
-    #     terraform_version: 1.6.5
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.6.5
 
-    # - name: Terraform Format
-    #   run: terraform fmt -check
-    #   working-directory: ./terraform/environment/development
+    - name: Login to Azure
+      uses: azure/login@v1.5.0
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
 
-    # - name: Login to Azure
-    #   uses: azure/login@v1.5.0
-    #   with:
-    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
-    #     enable-AzPSSession: true
+    - name: Show Destroy plan
+      run: terraform plan -destroy
+      continue-on-error: true
 
-    # - name: Terraform Init
-    #   run: terraform init -backend-config="backend.tfvars"
-    #   working-directory: ./terraform/environment/development
-
-    # - name: Terraform Plan
-    #   run: terraform plan -out=tfplan
-    #   working-directory: ./terraform/environment/development
-
-    # - name: Terraform Apply
-    #   run: terraform apply -auto-approve tfplan
-    #   working-directory: ./terraform/environment/development
-
-    # - name: Terraform Show
-    #   run: terraform show
-    #   working-directory: ./terraform/environment/development
+    - name: Destroy resources jobs
+      id: destroy
+      run: terraform destroy -auto-approve
