@@ -42,6 +42,8 @@ jobs:
     - name: Terraform Init
       run: terraform init -backend-config="backend.tf"
       working-directory: ./terraform/environment/development
+      env:
+        SENSITIVE_FIELD: ${{ secrets.ACCOUNT_KEY }}
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
