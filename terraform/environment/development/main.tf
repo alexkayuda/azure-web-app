@@ -1,24 +1,8 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.83.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-}
-
-# Resource Group
-resource "azurerm_resource_group" "dev-rg" {
-  name     = "dev-project-one-rg"
-  location = "WEST US 2"
-
-  tags = {
-    environment = "development"
-  }
+module "resource_group" {
+    source                  = "../modules/rg
+    location                = var.location
+    environment             = var.environment
+    resource_group_name     = var.resource_group_name
 }
 
 # Virtual Network 1
