@@ -1,14 +1,13 @@
-name: 'Terraform Deploy'
- 
+name: "Terraform Deploy"
+
 on:
   push:
     branches:
-    - master
- 
+      - master
 
 jobs:
   deploy:
-    name: 'Terraform Deploy'
+    name: "Terraform Deploy"
     environment: development
     runs-on: ubuntu-latest
     defaults:
@@ -19,43 +18,43 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
- 
+
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout Code
-      uses: actions/checkout@v4.1.1
- 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v3.0.0
-      with:
-        terraform_version: 1.6.5
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout Code
+        uses: actions/checkout@v4.1.1
 
-    - name: Terraform Format
-      run: terraform fmt -check -recursive
-      working-directory: ./terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3.0.0
+        with:
+          terraform_version: 1.6.5
 
-    - name: Terraform Validate
-      run: terraform validate
-      working-directory: ./terraform
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+        working-directory: ./terraform
 
-    - name: Login to Azure
-      uses: azure/login@v1.5.1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-        enable-AzPSSession: true
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./terraform
 
-    - name: Terraform Init
-      run: terraform init -backend-config="backend.tfvars"
-      working-directory: ./terraform/development
+      - name: Login to Azure
+        uses: azure/login@v1.5.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
 
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan
-      working-directory: ./terraform/development
+      - name: Terraform Init
+        run: terraform init -backend-config="backend.tfvars"
+        working-directory: ./terraform/development
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve tfplan
-      working-directory: ./terraform/development
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: ./terraform/development
 
-    - name: Terraform Show
-      run: terraform show
-      working-directory: ./terraform/development
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./terraform/development
+
+      - name: Terraform Show
+        run: terraform show
+        working-directory: ./terraform/development
