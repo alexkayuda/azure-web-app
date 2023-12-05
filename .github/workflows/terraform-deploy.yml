@@ -41,7 +41,7 @@ jobs:
         enable-AzPSSession: true
 
     - name: Terraform Init
-      run: terraform init -backend-config="provider.tf"
+      run: terraform init -backend-config="backend.tfvars"
       working-directory: ./terraform/development
 
     - name: Terraform Plan
