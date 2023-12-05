@@ -1,0 +1,5 @@
+subscription_id      = "30501ef0-77de-4327-ba85-2d06867b78f7"
+resource_group_name  = "tfstates"
+storage_account_name = "aktfstateaccount"
+container_name       = "tfstate"
+key                  = "terraform.tfstate"
