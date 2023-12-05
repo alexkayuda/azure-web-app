@@ -9,3 +9,7 @@ variable "environment" {
 variable "resource_group_name" {
   description = "Resource group name"
 }
+
+variable "virtual_network_name" {
+  description = "Virtual network name"
+}
