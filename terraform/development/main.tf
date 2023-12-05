@@ -30,3 +30,19 @@ module "security_group" {
   location            = var.location
   resource_group_name = module.resource_group.resource_group_name
 }
+
+module "security_rule" {
+  source                                         = "../modules/sg/sg-rules"
+  depends_on                                     = [module.security_group]
+  security_group_rule_name                       = var.security_group_rule_name
+  resource_group_name                            = module.resource_group.resource_group_name
+  security_group_name                            = module.security_group.security_group_name
+  security_group_rule_priority                   = var.security_group_rule_priority
+  security_group_rule_direction                  = var.security_group_rule_direction
+  security_group_rule_access                     = var.security_group_rule_access
+  security_group_rule_protocol                   = var.security_group_rule_protocol
+  security_group_rule_source_port_range          = var.security_group_rule_source_port_range
+  security_group_rule_destination_port_range     = var.security_group_rule_destination_port_range
+  security_group_rule_source_address_prefix      = var.security_group_rule_source_address_prefix
+  security_group_rule_destination_address_prefix = var.security_group_rule_source_address_prefix
+}
