@@ -32,7 +32,7 @@ jobs:
 
     - name: Terraform Format
       run: terraform fmt -check -recursive
-      working-directory: ./terraform/environment/
+      working-directory: ./terraform
 
     - name: Login to Azure
       uses: azure/login@v1.5.0
@@ -42,16 +42,16 @@ jobs:
 
     - name: Terraform Init
       run: terraform init -backend-config="provider.tf"
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
 
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
 
     - name: Terraform Show
       run: terraform show
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
