@@ -45,14 +45,14 @@ jobs:
     
     - name: Terraform Init
       run: terraform init -backend-config="backend.tfvars"
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
 
     - name: Show Destroy plan
       run: terraform plan -destroy -state="backend.tfvars"
       continue-on-error: true
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
 
     - name: Destroy resources jobs
       id: destroy
       run: terraform destroy -auto-approve -state="backend.tfvars"
-      working-directory: ./terraform/environment/development
+      working-directory: ./terraform/development
