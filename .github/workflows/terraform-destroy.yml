@@ -1,16 +1,16 @@
 name: 'Terraform Destroy'
  
 on:
-    workflow_dispatch:
-        inputs:
-            confirmation:
-                description: "Are you sure you want to run Terraform Destroy???"
-                required: true
-                type: choice
-                options:
-                    - yes
-                    - no
-                default: "no"
+  workflow_dispatch:
+      inputs:
+          confirmation:
+              description: "Are you sure you want to run Terraform Destroy???"
+              required: true
+              type: choice
+              options:
+                  - yes
+                  - no
+              default: "no"
  
 
 jobs:
