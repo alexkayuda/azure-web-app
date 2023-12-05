@@ -6,6 +6,6 @@ variable "environment" {
     description = "Environment"
 }
 
-variable "resource_group_name {
+variable "resource_group_name" {
     description = "Resource group name"
 }
