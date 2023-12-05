@@ -34,7 +34,7 @@ module "subnet-2" {
 
 module "security_group" {
   source              = "../modules/sg"
-  depends_on          = [module.subnet]
+  depends_on          = [module.subnet-1]
   resource_group_name = module.resource_group.resource_group_name
   security_group_name = var.security_group_name
   location            = var.location
