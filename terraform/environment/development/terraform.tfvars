@@ -1,3 +1,3 @@
-resource_group_name     = "dev-project-one-rg"
+resource_group_name     = "dev-rg"
 location                = "westus2"
 environment             = "dev"

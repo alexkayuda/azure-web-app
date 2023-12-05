@@ -4,6 +4,6 @@ resource "azurerm_virtual_network" "dev-vnet-1" {
   resource_group_name = "dev-rg"
 
   tags = {
-    environment = "${var.environment}"
+    environment = "$development"
   }
 }
