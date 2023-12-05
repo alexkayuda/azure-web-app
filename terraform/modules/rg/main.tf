@@ -1,9 +1,7 @@
-resource "azurerm_virtual_network" "dev-vnet-1" {
-  location = "westus2"
-  environment = "dev"
-  resource_group_name = "dev-rg"
-
+resource "azurerm_resource_group" "resource_group" {
+  name     = var.resource_group_name
+  location = var.location
   tags = {
-    environment = "$development"
+    environment = "${var.environment}"
   }
 }
