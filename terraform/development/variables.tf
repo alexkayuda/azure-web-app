@@ -21,11 +21,21 @@ variable "virtual_network_address_space" {
 }
 
 ####################################################################################
-variable "subnet_name" {
+variable "subnet-1_name" {
   description = "Subnet name"
 }
 
-variable "subnet_address_prefixes" {
+variable "subnet-1_address_prefixes" {
+  type        = list(any)
+  description = "Subnet - CIDR Block"
+}
+
+####################################################################################
+variable "subnet-2_name" {
+  description = "Subnet name"
+}
+
+variable "subnet-2_address_prefixes" {
   type        = list(any)
   description = "Subnet - CIDR Block"
 }

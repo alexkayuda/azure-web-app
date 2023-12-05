@@ -7,9 +7,13 @@ environment         = "dev"
 virtual_network_name          = "dev-vnet-1"
 virtual_network_address_space = ["10.0.0.0/16"]
 
-# Subnet
-subnet_name             = "dev-subnet-1"
-subnet_address_prefixes = ["10.0.1.0/24"]
+# Subnet 1
+subnet-1_name             = "dev-subnet-1"
+subnet-1_address_prefixes = ["10.0.0.0/24"]
+
+# Subnet 2
+subnet-2_name             = "dev-subnet-2"
+subnet-2_address_prefixes = ["10.0.1.0/24"]
 
 # Security Group
 security_group_name = "dev-sg-1"
