@@ -34,15 +34,31 @@ module "security_group" {
 module "security_rule" {
   source                                         = "../modules/sg/sg-rules"
   depends_on                                     = [module.security_group]
-  security_group_rule_name                       = var.security_group_rule_name
   resource_group_name                            = module.resource_group.resource_group_name
   security_group_name                            = module.security_group.security_group_name
-  security_group_rule_priority                   = var.security_group_rule_priority
-  security_group_rule_direction                  = var.security_group_rule_direction
-  security_group_rule_access                     = var.security_group_rule_access
-  security_group_rule_protocol                   = var.security_group_rule_protocol
-  security_group_rule_source_port_range          = var.security_group_rule_source_port_range
-  security_group_rule_destination_port_range     = var.security_group_rule_destination_port_range
-  security_group_rule_source_address_prefix      = var.security_group_rule_source_address_prefix
-  security_group_rule_destination_address_prefix = var.security_group_rule_source_address_prefix
+  security_group_rule_name                       = var.security_group_rule_allow_http_name
+  security_group_rule_priority                   = var.security_group_rule_allow_http_priority
+  security_group_rule_direction                  = var.security_group_rule_allow_http_direction
+  security_group_rule_access                     = var.security_group_rule_allow_http_access
+  security_group_rule_protocol                   = var.security_group_rule_allow_http_protocol
+  security_group_rule_source_port_range          = var.security_group_rule_allow_http_source_port_range
+  security_group_rule_destination_port_range     = var.security_group_rule_allow_http_destination_port_range
+  security_group_rule_source_address_prefix      = var.security_group_rule_allow_http_source_address_prefix
+  security_group_rule_destination_address_prefix = var.security_group_rule_allow_http_source_address_prefix
+}
+
+module "security_rule" {
+  source                                         = "../modules/sg/sg-rules"
+  depends_on                                     = [module.security_group]
+  resource_group_name                            = module.resource_group.resource_group_name
+  security_group_name                            = module.security_group.security_group_name
+  security_group_rule_name                       = var.security_group_rule_allow_ssh_name
+  security_group_rule_priority                   = var.security_group_rule_allow_ssh_priority
+  security_group_rule_direction                  = var.security_group_rule_allow_ssh_direction
+  security_group_rule_access                     = var.security_group_rule_allow_ssh_access
+  security_group_rule_protocol                   = var.security_group_rule_allow_ssh_protocol
+  security_group_rule_source_port_range          = var.security_group_rule_allow_ssh_source_port_range
+  security_group_rule_destination_port_range     = var.security_group_rule_allow_ssh_destination_port_range
+  security_group_rule_source_address_prefix      = var.security_group_rule_allow_ssh_source_address_prefix
+  security_group_rule_destination_address_prefix = var.security_group_rule_allow_ssh_source_address_prefix
 }
