@@ -1,6 +1,4 @@
 terraform {
-    required_version = "1.6.5"
-
     required_providers {
         azurerm = {
             source  = "hashicorp/azurerm"
@@ -15,6 +13,8 @@ terraform {
         container_name       = "tfstate"
         key                  = "terraform.tfstate"
     }
+
+    required_version = "1.6.5"
 }
 
 provider "azurerm" {
