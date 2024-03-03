@@ -15,6 +15,12 @@ subnet-1_address_prefixes = ["10.0.0.0/24"]
 subnet-2_name             = "dev-subnet-2"
 subnet-2_address_prefixes = ["10.0.1.0/24"]
 
+# Network Interface
+network_interface_name                          = "dev-nic"
+network_interface_ip_config_name                = "dev-nic-ip-config-name"
+network_interface_ip_config_subnet_id           = 123
+network_interface_private_ip_address_allocation = "Dynamic"
+
 # Security Group
 security_group_name = "dev-sg-1"
 
@@ -39,3 +45,15 @@ security_group_rule_allow_ssh_source_port_range          = "*"
 security_group_rule_allow_ssh_destination_port_range     = "22"
 security_group_rule_allow_ssh_source_address_prefix      = "*"
 security_group_rule_allow_ssh_destination_address_prefix = "*"
+
+# Load Balancer
+lb_name                        = "dev-lb"
+lb_sku                         = "Standard"
+lb_sku_tier                    = "Regional"
+lb_frontend_ip_config          = "LB_FrontEnd_IP_Config"
+lb_public_ip_name              = "dev-PublicIPForLB"
+lb_public_ip_allocation_method = "Dynamic"
+lb_backend_address_pool_name   = "dev-backend-pool-name"
+lb_probe_name                  = "tcpProbe"
+lb_probe_port                  = 80
+lb_probe_protocol              = "Tcp"

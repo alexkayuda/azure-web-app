@@ -71,3 +71,31 @@ module "allow-ssh_security_rule" {
   security_group_rule_source_address_prefix      = var.security_group_rule_allow_ssh_source_address_prefix
   security_group_rule_destination_address_prefix = var.security_group_rule_allow_ssh_source_address_prefix
 }
+
+module "network_interface" {
+  source                                          = "../modules/nic"
+  depends_on                                      = [module.subnet-1]
+  resource_group_name                             = module.resource_group.resource_group_name
+  network_interface_ip_config_subnet_id           = module.subnet-1.subnet_id
+  location                                        = var.location
+  network_interface_name                          = var.network_interface_name
+  network_interface_ip_config_name                = var.network_interface_ip_config_name
+  network_interface_private_ip_address_allocation = var.network_interface_private_ip_address_allocation
+}
+
+# module "lb" {
+#   source                         = "../modules/lb"
+#   depends_on                     = [module.network_interface, module.subnet-1]
+#   resource_group_name            = module.resource_group.resource_group_name
+#   location                       = var.location
+#   lb_name                        = var.lb_name
+#   lb_sku                         = var.lb_sku
+#   lb_sku_tier                    = var.lb_sku_tier
+#   lb_frontend_ip_config          = var.lb_frontend_ip_config
+#   lb_public_ip_name              = var.lb_public_ip_name
+#   lb_public_ip_allocation_method = var.lb_public_ip_allocation_method
+#   lb_backend_address_pool_name   = var.lb_backend_address_pool_name
+#   lb_probe_name                  = var.lb_probe_name
+#   lb_probe_port                  = var.lb_probe_port
+#   lb_probe_protocol              = var.lb_probe_protocol
+# }
