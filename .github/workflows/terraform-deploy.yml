@@ -58,13 +58,13 @@ jobs:
       #     sarif_file: terrascan.sarif
 
       - name: Login to Azure
-        uses: azure/login@v1.5.1
+        uses: azure/login@v1.6.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
 
       - name: Terraform Init
-        run: terraform init -backend-config="backend.tfvars"
+        run: terraform init -reconfigure -backend-config="backend.tfvars"
         working-directory: ./terraform/development
 
       - name: Terraform Plan

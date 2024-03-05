@@ -1,3 +1,8 @@
+#
+/documentation/files.txt
+/terraform/development/.terraform/
+/terraform/development/.terraform.lock.hcl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
